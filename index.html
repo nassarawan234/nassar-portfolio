@@ -261,14 +261,24 @@ main section[id]{scroll-margin-top:84px}
 .post-item .post-ext svg{width:18px; height:18px; stroke:var(--teal)}
 @media (max-width:540px){ .post-item{padding:18px} .post-item .post-num{width:26px; font-size:1.15rem} }
 
-/* Post groups */
-.post-group{margin-top:38px}
-.post-group-head{display:flex; align-items:center; gap:12px; margin-bottom:16px; padding-bottom:13px; border-bottom:1px solid var(--line)}
-.post-group-head h3{font-size:1.45rem}
+/* Post groups — collapsible */
+.post-group{margin-top:24px}
+.post-group-toggle{display:flex; align-items:center; gap:14px; width:100%; text-align:left; background:var(--surface); border:1px solid var(--line); border-radius:var(--radius); padding:22px 24px; cursor:pointer; color:var(--ink); font-family:"Bricolage Grotesque","Manrope",sans-serif; font-weight:700; font-size:1.22rem; line-height:1.3; transition:border-color .18s ease, background .18s ease}
+.post-group-toggle:hover{border-color:var(--teal); background:var(--surface2)}
+.post-group-toggle.amber:hover{border-color:var(--amber-bright)}
 .pg-dot{width:11px; height:11px; border-radius:50%; background:var(--teal); flex:none}
-.post-group-head.amber .pg-dot{background:var(--amber-bright)}
-.pg-meta{margin-left:auto; font-size:.83rem; font-weight:800; letter-spacing:.06em; text-transform:uppercase; color:var(--muted); text-align:right}
-@media (max-width:540px){ .pg-meta{display:none} }
+.post-group-toggle.amber .pg-dot{background:var(--amber-bright)}
+.pg-count{color:var(--muted); font-family:"Manrope",sans-serif; font-weight:800; font-size:.95rem; white-space:nowrap}
+.pg-chevron{margin-left:auto; flex:none; width:38px; height:38px; border-radius:50%; background:var(--teal-soft); display:grid; place-items:center; transition:transform .35s ease}
+.pg-chevron svg{width:19px; height:19px; stroke:var(--teal)}
+.post-group-toggle.amber .pg-chevron{background:var(--amber-soft)}
+.post-group-toggle.amber .pg-chevron svg{stroke:var(--amber-bright)}
+.post-group-toggle[aria-expanded="true"] .pg-chevron{transform:rotate(180deg)}
+.post-collapse{display:grid; grid-template-rows:0fr; transition:grid-template-rows .45s ease}
+.post-collapse.open{grid-template-rows:1fr}
+.post-collapse-inner{overflow:hidden; min-height:0}
+.post-collapse .post-list{padding-top:16px}
+@media (max-width:540px){ .post-group-toggle{padding:18px; font-size:1.08rem} .pg-count{white-space:normal} }
 
 /* Stats row */
 .stats-row{display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-bottom:30px}
@@ -452,11 +462,13 @@ main section[id]{scroll-margin-top:84px}
         </div>
       </div>
       <div class="post-group">
-        <div class="post-group-head">
+        <button class="post-group-toggle" type="button" id="capcutToggle" aria-expanded="false" aria-controls="capcutPosts">
           <span class="pg-dot" aria-hidden="true"></span>
-          <h3>CapCut</h3>
-          <span class="pg-meta">Video editing · 25 guest posts</span>
-        </div>
+          <span>CapCut Articles Are Here &mdash; Open This Link <span class="pg-count">(25 posts)</span></span>
+          <span class="pg-chevron" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></span>
+        </button>
+        <div class="post-collapse" id="capcutPosts" role="region" aria-labelledby="capcutToggle">
+        <div class="post-collapse-inner">
         <div class="post-list">
         <a class="post-item" href="https://onestep4ward.com/explore-unique-texture-layers-using-ai-background-generator/" target="_blank" rel="noopener">
           <span class="post-num">01</span>
@@ -659,13 +671,17 @@ main section[id]{scroll-margin-top:84px}
           <span class="post-ext" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"/><path d="M8 7h9v9"/></svg></span>
         </a>
         </div>
+        </div>
+        </div>
       </div>
       <div class="post-group">
-        <div class="post-group-head amber">
+        <button class="post-group-toggle amber" type="button" id="addmotorToggle" aria-expanded="false" aria-controls="addmotorPosts">
           <span class="pg-dot" aria-hidden="true"></span>
-          <h3>Addmotor</h3>
-          <span class="pg-meta">E-bikes &amp; e-scooters · 12 guest posts</span>
-        </div>
+          <span>Addmotor Articles Are Here &mdash; Open This Link <span class="pg-count">(12 posts)</span></span>
+          <span class="pg-chevron" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></span>
+        </button>
+        <div class="post-collapse" id="addmotorPosts" role="region" aria-labelledby="addmotorToggle">
+        <div class="post-collapse-inner">
         <div class="post-list">
         <a class="post-item" href="https://sigal-industries.fr/que-v-rifier-avant-de-choisir-une-trottinette-lectrique-de-150-kg" target="_blank" rel="noopener">
           <span class="post-num">01</span>
@@ -763,6 +779,8 @@ main section[id]{scroll-margin-top:84px}
           </span>
           <span class="post-ext" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"/><path d="M8 7h9v9"/></svg></span>
         </a>
+        </div>
+        </div>
         </div>
       </div>
       </div>
@@ -1031,6 +1049,17 @@ main section[id]{scroll-margin-top:84px}
       if (navigator.clipboard && navigator.clipboard.writeText) {
         navigator.clipboard.writeText(text).then(done).catch(done);
       } else { done(); }
+    });
+  });
+
+  document.querySelectorAll('.post-group-toggle').forEach(function(btn){
+    var panel = document.getElementById(btn.getAttribute('aria-controls'));
+    if (!panel) return;
+    panel.inert = true;
+    btn.addEventListener('click', function(){
+      var open = panel.classList.toggle('open');
+      btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+      panel.inert = !open;
     });
   });
 
