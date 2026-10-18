@@ -11,12 +11,27 @@ jobs:
       - name: Fetch upgraded portfolio HTML
         run: |
           set -eux
-          curl -sL --fail "https://muse.ai/s/nassar-portfolio-up667yxmpxk5xw" -o index.html
+          SHARE_URL="https://muse.ai/s/nassar-portfolio-up667yxmpxk5xw"
+          curl -sL --fail "$SHARE_URL" -o wrapper.html
+          wc -c wrapper.html
+          IFRAME_TAG=$(grep -oE '<iframe[^>]*>' wrapper.html | head -n 1)
+          echo "iframe tag: $IFRAME_TAG"
+          IFRAME_SRC=$(echo "$IFRAME_TAG" | grep -oE 'src="[^"]+"' | head -n 1 | cut -d'"' -f2)
+          echo "iframe src: $IFRAME_SRC"
+          if [ -z "$IFRAME_SRC" ]; then echo "ERROR: no iframe src found in share page"; exit 1; fi
+          case "$IFRAME_SRC" in
+            http://*|https://*) CONTENT_URL="$IFRAME_SRC" ;;
+            //*) CONTENT_URL="https:$IFRAME_SRC" ;;
+            /*) CONTENT_URL="https://muse.ai$IFRAME_SRC" ;;
+            *) CONTENT_URL="$SHARE_URL/$IFRAME_SRC" ;;
+          esac
+          echo "Fetching content from: $CONTENT_URL"
+          curl -sL --fail "$CONTENT_URL" -o index.html
           wc -c index.html
           SIZE=$(wc -c < index.html)
           if [ "$SIZE" -lt 2000000 ]; then echo "ERROR: index.html too small: $SIZE bytes"; exit 1; fi
           grep -q "</html>" index.html || { echo "ERROR: downloaded file is not complete HTML"; exit 1; }
-          grep -q "Selected Work" index.html || { echo "ERROR: missing 'Selected Work' section"; exit 1; }
+          grep -q "Selected Work" index.html || { echo "ERROR: missing Selected Work section"; exit 1; }
           grep -q "FAQ" index.html || { echo "ERROR: missing FAQ section"; exit 1; }
           grep -q "CapCut" index.html || { echo "ERROR: missing CapCut"; exit 1; }
           grep -q "Addmotor" index.html || { echo "ERROR: missing Addmotor"; exit 1; }
