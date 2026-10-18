@@ -255,6 +255,15 @@ main section[id]{scroll-margin-top:84px}
 .post-item .post-ext svg{width:18px; height:18px; stroke:var(--teal)}
 @media (max-width:540px){ .post-item{padding:18px} .post-item .post-num{width:26px; font-size:1.15rem} }
 
+/* Stats row */
+.stats-row{display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-bottom:30px}
+.stat{background:var(--surface); border:1px solid var(--line); border-radius:var(--radius); padding:24px 26px; text-align:center}
+.stat .stat-num{font-family:"Bricolage Grotesque",sans-serif; font-size:2.6rem; font-weight:800; line-height:1; color:var(--teal); display:block}
+.stat:nth-child(2) .stat-num{color:var(--amber-bright)}
+.stat .stat-label{display:block; margin-top:9px; font-weight:800; font-size:.92rem}
+.stat .stat-sub{display:block; margin-top:3px; font-size:.85rem; color:var(--muted); font-weight:600}
+@media (max-width:700px){ .stats-row{grid-template-columns:1fr} }
+
 /* FAQ */
 .faq-list{display:grid; gap:12px; max-width:820px}
 .faq-item{background:var(--surface); border:1px solid var(--line); border-radius:14px; overflow:hidden}
@@ -401,6 +410,23 @@ main section[id]{scroll-margin-top:84px}
         <h2>Articles I&rsquo;ve placed for clients</h2>
         <p class="lede">Live guest posts published on real publisher websites — article, site and link, so you can see exactly the kind of placements my outreach delivers.</p>
       </div>
+      <div class="stats-row">
+        <div class="stat">
+          <span class="stat-num">11</span>
+          <span class="stat-label">Published Guest Posts</span>
+          <span class="stat-sub">Live articles placed for clients</span>
+        </div>
+        <div class="stat">
+          <span class="stat-num">2</span>
+          <span class="stat-label">Global Brands</span>
+          <span class="stat-sub">CapCut &amp; Addmotor</span>
+        </div>
+        <div class="stat">
+          <span class="stat-num">3</span>
+          <span class="stat-label">Languages</span>
+          <span class="stat-sub">English, German &amp; French</span>
+        </div>
+      </div>
       <div class="post-list">
         <a class="post-item" href="https://sigal-industries.fr/que-v-rifier-avant-de-choisir-une-trottinette-lectrique-de-150-kg" target="_blank" rel="noopener">
           <span class="post-num">01</span>
@@ -439,6 +465,54 @@ main section[id]{scroll-margin-top:84px}
           <span class="post-text">
             <h3>Hoverboard kaufen: Diese Merkmale sind wirklich wichtig</h3>
             <span class="post-domain">contentwelle.de</span>
+          </span>
+          <span class="post-ext" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"/><path d="M8 7h9v9"/></svg></span>
+        </a>
+        <a class="post-item" href="https://onestep4ward.com/explore-unique-texture-layers-using-ai-background-generator/" target="_blank" rel="noopener">
+          <span class="post-num">06</span>
+          <span class="post-text">
+            <h3>Explore Unique Texture Layers Using AI Background Generator</h3>
+            <span class="post-domain">onestep4ward.com</span>
+          </span>
+          <span class="post-ext" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"/><path d="M8 7h9v9"/></svg></span>
+        </a>
+        <a class="post-item" href="https://www.canyon-news.com/the-perfect-match-how-expressions-make-or-break-a-lip-sync-video/" target="_blank" rel="noopener">
+          <span class="post-num">07</span>
+          <span class="post-text">
+            <h3>The Perfect Match: How Expressions Make or Break a Lip Sync Video</h3>
+            <span class="post-domain">canyon-news.com</span>
+          </span>
+          <span class="post-ext" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"/><path d="M8 7h9v9"/></svg></span>
+        </a>
+        <a class="post-item" href="https://www.canyon-news.com/how-to-design-fun-characters-with-capcut-ai-avatar/" target="_blank" rel="noopener">
+          <span class="post-num">08</span>
+          <span class="post-text">
+            <h3>How To Design Fun Characters With CapCut AI Avatar</h3>
+            <span class="post-domain">canyon-news.com</span>
+          </span>
+          <span class="post-ext" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"/><path d="M8 7h9v9"/></svg></span>
+        </a>
+        <a class="post-item" href="https://www.luxurytravelmagazine.com/news-articles/capturing-the-essence-of-luxury-travel-enhancing-storytelling-through-video" target="_blank" rel="noopener">
+          <span class="post-num">09</span>
+          <span class="post-text">
+            <h3>Capturing the Essence of Luxury Travel: Enhancing Storytelling Through Video</h3>
+            <span class="post-domain">luxurytravelmagazine.com</span>
+          </span>
+          <span class="post-ext" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"/><path d="M8 7h9v9"/></svg></span>
+        </a>
+        <a class="post-item" href="https://asouthernfairytale.com/why-energy-independence-is-becoming-the-smartest-upgrade-for-modern-homes/" target="_blank" rel="noopener">
+          <span class="post-num">10</span>
+          <span class="post-text">
+            <h3>The New Status Symbol: Why Energy Independence Is Becoming the Smartest Upgrade for Modern Homes</h3>
+            <span class="post-domain">asouthernfairytale.com</span>
+          </span>
+          <span class="post-ext" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"/><path d="M8 7h9v9"/></svg></span>
+        </a>
+        <a class="post-item" href="https://anglotopia.net/news-features/managing-complex-projects-with-customizable-task-boards" target="_blank" rel="noopener">
+          <span class="post-num">11</span>
+          <span class="post-text">
+            <h3>Managing Complex Projects with Customizable Task Boards</h3>
+            <span class="post-domain">anglotopia.net</span>
           </span>
           <span class="post-ext" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"/><path d="M8 7h9v9"/></svg></span>
         </a>
