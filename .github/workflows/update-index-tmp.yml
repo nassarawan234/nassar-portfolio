@@ -1,0 +1,34 @@
+name: Temp update index.html
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Download newest index.html
+        run: |
+          curl -sL "https://muse.ai/files/1327713840433448/1116091404128374/2f117yle665w292uxzshwmdh/nassar-portfolio.html" -o index.html
+          BYTES=$(wc -c < index.html)
+          echo "Downloaded bytes: $BYTES"
+          test "$BYTES" -eq 3052510 || { echo "ERROR: expected 3052510 bytes, got $BYTES"; exit 1; }
+          grep -q "</html>" index.html || { echo "ERROR: missing </html>"; exit 1; }
+          grep -q "Cambios instant" index.html || { echo "ERROR: new-version marker 'Cambios instant' not found"; exit 1; }
+          grep -q "5 Languages" index.html || { echo "ERROR: new-version marker '5 Languages' not found"; exit 1; }
+          echo "Verification passed"
+      - name: Commit and push to main
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          if git diff --quiet -- index.html; then
+            echo "index.html already matches the newest version; nothing to commit."
+          else
+            git add index.html
+            git commit -m "Update index.html to newest portfolio version"
+            git push origin main
+          fi
