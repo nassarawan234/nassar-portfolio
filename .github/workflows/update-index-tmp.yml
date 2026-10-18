@@ -19,7 +19,7 @@ jobs:
           test "$BYTES" -eq 3052510 || { echo "ERROR: expected 3052510 bytes, got $BYTES"; exit 1; }
           grep -q "</html>" index.html || { echo "ERROR: missing </html>"; exit 1; }
           grep -q "Cambios instant" index.html || { echo "ERROR: new-version marker 'Cambios instant' not found"; exit 1; }
-          grep -q "5 Languages" index.html || { echo "ERROR: new-version marker '5 Languages' not found"; exit 1; }
+          grep -q "Crie melhores campanhas" index.html || { echo "ERROR: new-version marker 'Crie melhores campanhas' not found"; exit 1; }
           echo "Verification passed"
       - name: Commit and push to main
         run: |
