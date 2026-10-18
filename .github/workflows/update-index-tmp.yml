@@ -1,0 +1,41 @@
+name: Update index.html (temporary)
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update-index:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Download and verify newest index.html
+        run: |
+          set -euo pipefail
+          curl -sSL "https://muse.ai/files/1327713840433448/1651312353049174/6p2wlo1k96n3dej5z3scop0y/nassar-portfolio.html" -o index.html
+          SIZE=$(stat -c%s index.html)
+          echo "Downloaded $SIZE bytes"
+          if [ "$SIZE" -lt 3100000 ] || [ "$SIZE" -gt 3120000 ]; then
+            echo "ERROR: unexpected size ($SIZE bytes), expected ~3110547"
+            exit 1
+          fi
+          grep -q '</html>' index.html || { echo "ERROR: downloaded file is missing </html>"; exit 1; }
+          echo "Verified: $SIZE bytes and contains </html>"
+
+      - name: Commit and push index.html
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html
+          if git diff --cached --quiet; then
+            echo "index.html unchanged; nothing to commit"
+          else
+            git commit -m "Update index.html to newest portfolio version (collapsible article groups)"
+            git push
+            echo "Committed and pushed index.html"
+          fi
