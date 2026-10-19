@@ -1,0 +1,36 @@
+name: Update index.html (temporary)
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update-index:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Download newest index.html and verify
+        run: |
+          set -euo pipefail
+          curl -sL "https://muse.ai/files/1327713840433448/1097952559696603/vfujakhsyqlcb0lh4b3dqcz0/nassar-portfolio.html" -o index.html
+          SIZE=$(stat -c%s index.html)
+          echo "Downloaded bytes: $SIZE"
+          if [ "$SIZE" -lt 3110000 ]; then
+            echo "ERROR: download incomplete (expected ~3115446 bytes, got $SIZE)"
+            exit 1
+          fi
+          grep -q "</html>" index.html || { echo "ERROR: missing </html> tag"; exit 1; }
+          echo "Verification passed: byte-complete, contains </html>"
+
+      - name: Commit and push to main
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html
+          git commit -m "Update index.html to newest version (dedicated Contact page)" || echo "Nothing to commit"
+          git push origin HEAD:main
