@@ -335,6 +335,7 @@ main section[id]{scroll-margin-top:84px}
       <a href="#/services" data-nav="services">Services</a>
       <a href="#/work" data-nav="work">Work</a>
       <a href="#/projects" data-nav="projects">Projects</a>
+      <a href="#/contact" data-nav="contact">Contact</a>
       <a class="btn btn-primary nav-cta" href="https://wa.me/923299836078" target="_blank" rel="noopener">Hire Me</a>
     </nav>
   </div>
@@ -988,7 +989,7 @@ main section[id]{scroll-margin-top:84px}
   </section>
 
   <!-- CONTACT -->
-  <section id="contact">
+  <section id="contact" data-page="contact">
     <div class="wrap">
       <div class="contact-grid">
         <div>
@@ -1056,6 +1057,7 @@ main section[id]{scroll-margin-top:84px}
       <a href="#/services" data-nav="services">Services</a>
       <a href="#/work" data-nav="work">Work</a>
       <a href="#/projects" data-nav="projects">Projects</a>
+      <a href="#/contact" data-nav="contact">Contact</a>
       <a href="#top">Back to top ↑</a>
     </nav>
     <span>
@@ -1125,18 +1127,19 @@ main section[id]{scroll-margin-top:84px}
 })();
 </script>
 <script>
-/* Hash router — 5 pages in one file: #/ (home), #/about, #/services, #/work, #/projects */
+/* Hash router — 6 pages in one file: #/ (home), #/about, #/services, #/work, #/projects, #/contact */
 (function(){
   var TITLES = {
     home: 'Nassar — SEO & Backlink Expert',
     about: 'About — Nassar — SEO & Backlink Expert',
     services: 'Services — Nassar — SEO & Backlink Expert',
     work: 'Work — Nassar — SEO & Backlink Expert',
-    projects: 'Projects — Nassar — SEO & Backlink Expert'
+    projects: 'Projects — Nassar — SEO & Backlink Expert',
+    contact: 'Contact — Nassar — SEO & Backlink Expert'
   };
-  var ROUTES = { '': 'home', '/': 'home', '/home': 'home', '/about': 'about', '/services': 'services', '/work': 'work', '/projects': 'projects' };
+  var ROUTES = { '': 'home', '/': 'home', '/home': 'home', '/about': 'about', '/services': 'services', '/work': 'work', '/projects': 'projects', '/contact': 'contact' };
   /* Old single-page anchors keep working: they land on the page that now holds the section. */
-  var LEGACY = { about: 'about', faq: 'about', work: 'work', posts: 'projects', services: 'services', process: 'services', network: 'services', 'guest-posting': 'services' };
+  var LEGACY = { about: 'about', faq: 'about', work: 'work', posts: 'projects', services: 'services', process: 'services', network: 'services', 'guest-posting': 'services', contact: 'contact' };
 
   function scrollTop(){
     var de = document.documentElement;
