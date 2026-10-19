@@ -1,0 +1,49 @@
+name: Update index.html (temporary)
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update-index:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Download newest index.html
+        run: |
+          curl -sSL "https://muse.ai/files/1327713840433448/1474180064609873/lcbtns2ukfmnu4y8oig72ry2/nassar-portfolio.html" -o index.html
+
+      - name: Verify byte-complete download
+        run: |
+          SIZE=$(stat -c%s index.html)
+          echo "Downloaded ${SIZE} bytes"
+          if [ "$SIZE" -lt 3100000 ] || [ "$SIZE" -gt 3130000 ]; then
+            echo "ERROR: unexpected file size ${SIZE} (expected ~3115197)"
+            exit 1
+          fi
+          if ! grep -q "</html>" index.html; then
+            echo "ERROR: downloaded file is missing </html>"
+            exit 1
+          fi
+          echo "Verification passed"
+
+      - name: Commit index.html and remove this temporary workflow
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html
+          CHANGED=false
+          if ! git diff --cached --quiet -- index.html; then
+            CHANGED=true
+          fi
+          git rm -q .github/workflows/temp-update-index.yml
+          if [ "$CHANGED" = "true" ]; then
+            git commit -m "Update index.html to newest version (5-page portfolio)"
+          else
+            git commit -m "Remove temporary update workflow (index.html already current)"
+          fi
+          git push origin HEAD:main
